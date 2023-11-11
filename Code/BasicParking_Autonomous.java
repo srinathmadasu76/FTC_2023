@@ -44,9 +44,8 @@ import com.qualcomm.robotcore.util.ElapsedTime;
  *   otherwise you would use: RobotAutoDriveByEncoder;
  *
  *   The desired path in this example is:
- *   - Spin right for 0.3 seconds
  *   - Drive forward for 2 seconds
- *   - Spin left for 0.5 seconds
+ *   - Straife for 0.5 seconds
  *
  *  The code is written in a simple form with no optimizations.
  *  However, there are several ways that this type of sequence could be streamlined,
@@ -93,52 +92,43 @@ public class BasicParking_Autonomous extends LinearOpMode {
 
         // Step through each leg of the path, ensuring that the Auto mode has not been stopped along the way
 
-        // Step 1:  Spin right for 0.5 seconds
-        FrontLeft.setPower(1);
-        BackLeft.setPower(1);
-        FrontRight.setPower(-1);
-        BackRight.setPower(-1);
         runtime.reset();
-        while (opModeIsActive() && (runtime.seconds() < 0.5)) {
-            telemetry.addData("Path", "Leg 1: %4.1f S Elapsed", runtime.seconds());
-            telemetry.update();
-        }
 
-        // Step 2:  Drive forward for 2 seconds
-        FrontLeft.setPower(1);
-        BackLeft.setPower(1);
-        FrontRight.setPower(1);
-        BackRight.setPower(1);
+        // Step 1:  Drive forward for 0.8 seconds
+        FrontLeft.setPower(0.5);
+        BackLeft.setPower(0.5);
+        FrontRight.setPower(0.5);
+        BackRight.setPower(0.5);
         runtime.reset();
-        while (opModeIsActive() && (runtime.seconds() < 2.0)) {
+        while (opModeIsActive() && (runtime.seconds() < 0.8)) {
             telemetry.addData("Path", "Leg 2: %4.1f S Elapsed", runtime.seconds());
             telemetry.update();
         }
 
 
 
-        // Step 3:  Spin left for 0.5 seconds
-        FrontLeft.setPower(-1);
-        BackLeft.setPower(-1);
-        FrontRight.setPower(1);
-        BackRight.setPower(1);
+        // Step 4:  Strafe left for 1.5 seconds
+        FrontLeft.setPower(-0.5);
+        BackLeft.setPower(0.5);
+        FrontRight.setPower(0.5);
+        BackRight.setPower(- 0.5);
         runtime.reset();
-        while (opModeIsActive() && (runtime.seconds() < 0.5)) {
+        while (opModeIsActive() && (runtime.seconds() < 1.5)) {
             telemetry.addData("Path", "Leg 3: %4.1f S Elapsed", runtime.seconds());
             telemetry.update();
         }
 
-        // Step 4:  Drive forward for 4 seconds
-        FrontLeft.setPower(1);
-        BackLeft.setPower(1);
-        FrontRight.setPower(1);
-        BackRight.setPower(1);
+        // Step 3:  Drive bs=ackward for 1 seconds
+        FrontLeft.setPower(-0.5);
+        BackLeft.setPower(-0.5);
+        FrontRight.setPower(-0.5);
+        BackRight.setPower(-0.5);
         runtime.reset();
-        while (opModeIsActive() && (runtime.seconds() < 4.0)) {
+        while (opModeIsActive() && (runtime.seconds() < 1.0)) {
             telemetry.addData("Path", "Leg 4: %4.1f S Elapsed", runtime.seconds());
             telemetry.update();
         }
-        // Step 5:  Stop
+        // Step 4:  Stop
         FrontLeft.setPower(0);
         BackLeft.setPower(0);
         FrontRight.setPower(0);
