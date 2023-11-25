@@ -5,6 +5,8 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
+import com.qualcomm.robotcore.util.ElapsedTime;
+import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.util.Range;
 
 @TeleOp(name="teleop_robot")
@@ -14,10 +16,13 @@ public class BasicRobot extends OpMode
     DcMotor FrontRight = null;
     DcMotor BackLeft = null;
     DcMotor BackRight = null;
-
+    DcMotor Intake = null;
     Servo leftClaw= null;
     Servo rightClaw= null;
     DcMotor arm= null;
+
+    CRServo contServo;
+    CRServo rackpServo;
     double griprPosition = .2;
     double griplPosition = .2;
     double griprDelta = .1;
@@ -25,10 +30,13 @@ public class BasicRobot extends OpMode
 
     private DcMotor armLeft;
     private DcMotor armRight;
-
-    double          clawOffset  = 0.3 ;                  // Servo mid position
+    double          clawOffset  = 0. ;                  // Servo mid position
     final double    CLAW_SPEED  = 0.01 ;                 // sets rate to move servo
+    private ElapsedTime runtime = new ElapsedTime();
+    double cntPower =0.;
+    double racpPower = 0.;
 
+    double armpower;
     @Override
     public void init()
     {
@@ -38,13 +46,16 @@ public class BasicRobot extends OpMode
         BackLeft = hardwareMap.dcMotor.get("BL");
         BackRight = hardwareMap.dcMotor.get("BR");
 
+        Intake = hardwareMap.dcMotor.get("Intake");
 
         FrontLeft.setDirection(DcMotorSimple.Direction.REVERSE);
         BackLeft.setDirection(DcMotorSimple.Direction.REVERSE);
 
-        leftClaw = hardwareMap.servo.get("leftclaw");
-        rightClaw = hardwareMap.servo.get("rightclaw");
+        // = hardwareMap.servo.get("leftclaw");
+        //rightClaw = hardwareMap.servo.get("rightclaw");
         arm = hardwareMap.dcMotor.get("arm");
+        contServo = hardwareMap.crservo.get("grabberServo");
+        rackpServo = hardwareMap.crservo.get("rackpinnionServo");
 
         //arm.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         //arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
@@ -54,54 +65,100 @@ public class BasicRobot extends OpMode
     @Override
     public void loop()
     {
+        Intake.setPower(0.);
+        FrontRight.setPower(0);
+        BackLeft.setPower(0);
+        FrontLeft.setPower(0);
+        BackRight.setPower(0);
+        if (gamepad1.y) {
+           arm.setPower(0.3);
+           rackpServo.setPower(0.3);
+            runtime.reset();
+            while ( (runtime.seconds() < 0.5)) {
+                telemetry.addData("Path", "Leg 3: %4.1f S Elapsed", runtime.seconds());
+                telemetry.update();
+            }
+            arm.setPower(0.);
+            rackpServo.setPower(0.);
+        }
+
         if (gamepad2.left_stick_y!=0.0) {
-            arm.setPower(gamepad2.left_stick_y);
+            armpower =  Range.clip(gamepad2.left_stick_y, -0.35, 0.35);
+            arm.setPower(armpower);
         }
         else{
             arm.setPower(0.);
         }
+        if (gamepad2.right_stick_y!=0.0) {
+            Intake.setPower(gamepad2.right_stick_y);
+        }
+        else{
+            Intake.setPower(0.);
+        }
         if (gamepad1.left_stick_y!=0.0){
-            FrontLeft.setPower(-gamepad1.left_stick_y);
+            FrontRight.setPower(-gamepad1.left_stick_y);
             BackLeft.setPower(-gamepad1.left_stick_y);
         }
         else{
-            FrontLeft.setPower(0);
+            FrontRight.setPower(0);
             BackLeft.setPower(0);
         }
         if (gamepad1.right_stick_y!=0.0){
-            FrontRight.setPower(-gamepad1.right_stick_y);
+            FrontLeft.setPower(-gamepad1.right_stick_y);
             BackRight.setPower(-gamepad1.right_stick_y);
         }
         else{
-            FrontRight.setPower(0);
+            FrontLeft.setPower(0);
             BackRight.setPower(0);
         }
         if (gamepad1.left_bumper){
-            FrontLeft.setPower(-1);
-            BackLeft.setPower(1);
-            FrontRight.setPower(1);
-            BackRight.setPower(-1);
+            FrontLeft.setPower(-0.5);
+            BackLeft.setPower(-0.5);
+            FrontRight.setPower(0.5);
+            BackRight.setPower(+0.5);
         }
        else if(gamepad1.right_bumper){
-            FrontLeft.setPower(1);
-            BackLeft.setPower(-1);
-            FrontRight.setPower(-1);
-            BackRight.setPower(1);
+            FrontLeft.setPower(0.5);
+            BackLeft.setPower(0.5);
+            FrontRight.setPower(-0.5);
+            BackRight.setPower(-0.5);
         }
 
             if (gamepad2.y){
-            clawOffset += CLAW_SPEED;
+
+                    //clawOffset += CLAW_SPEED;
+                cntPower = 0.;
+                racpPower = 0.;
 
         }
         else if (gamepad2.a){
-            clawOffset -= CLAW_SPEED;
+
+                //clawOffset -= CLAW_SPEED;
+                cntPower = 0.2;
+
+            }
+            else if (gamepad2.b){
+
+                //clawOffset -= CLAW_SPEED;
+                cntPower = -0.2;
+
+            }
+        if (gamepad2.left_bumper){
+            racpPower = 0.9;
+
+        }
+        else if(gamepad2.right_bumper){
+            racpPower = -0.9;
 
         }
 
-        // Move both servos to new position.  Assume servos are mirror image of each other.
-        clawOffset = Range.clip(clawOffset, -0.3, 0.3);
-        leftClaw.setPosition(clawOffset);
-        rightClaw.setPosition(-clawOffset);
+            contServo.setPower(cntPower);
+            rackpServo.setPower(racpPower);
+            //clawOffset = Range.clip(clawOffset, -0.3, 0.3);
+            //leftClaw.setPosition(clawOffset);
+            //rightClaw.setPosition(-clawOffset);
+        }
+
+
 
     }
-}

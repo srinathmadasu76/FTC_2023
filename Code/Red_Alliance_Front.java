@@ -70,9 +70,9 @@ public class Red_Alliance_Front extends LinearOpMode {
 
 
         // Step 4:  Strafe right for 1.5 seconds
-        FrontLeft.setPower(-0.5);
+        FrontLeft.setPower(0.5);
         BackLeft.setPower(-0.5);
-        FrontRight.setPower(0.5);
+        FrontRight.setPower(-0.5);
         BackRight.setPower(0.5);
         runtime.reset();
         while (opModeIsActive() && (runtime.seconds() < 2.3)) {

@@ -1,11 +1,11 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.util.ElapsedTime;
+
 
 /*
  * This OpMode illustrates the concept of driving a path based on time.
@@ -25,9 +25,9 @@ import com.qualcomm.robotcore.util.ElapsedTime;
  * Remove or comment out the @Disabled line to add this OpMode to the Driver Station OpMode list
  */
 
-@Autonomous(name="Red_Alliance_Rear", group="Robot")
+@Autonomous(name="Blue_Alliance_Rear", group="Robot")
 //@Disabled
-public class Red_Alliance_Rear extends LinearOpMode {
+public class Blue_Alliance_Rear extends LinearOpMode {
 
     /* Declare OpMode members. */
 
@@ -35,7 +35,7 @@ public class Red_Alliance_Rear extends LinearOpMode {
     DcMotor FrontRight = null;
     DcMotor BackLeft = null;
     DcMotor BackRight = null;
-    private ElapsedTime     runtime = new ElapsedTime();
+    private ElapsedTime runtime = new ElapsedTime();
 
 
     static final double     FORWARD_SPEED = 0.6;
@@ -79,10 +79,10 @@ public class Red_Alliance_Rear extends LinearOpMode {
 
 
         // Step 4:  Strafe right for 1.5 seconds
-        FrontLeft.setPower(0.5);
-        BackLeft.setPower(-0.5);
-        FrontRight.setPower(-0.5);
-        BackRight.setPower(0.5);
+        FrontLeft.setPower(-0.5);
+        BackLeft.setPower(0.5);
+        FrontRight.setPower(0.5);
+        BackRight.setPower(-0.5);
         runtime.reset();
         while (opModeIsActive() && (runtime.seconds() < 4.3)) {
             telemetry.addData("Path", "Leg 3: %4.1f S Elapsed", runtime.seconds());
@@ -110,3 +110,4 @@ public class Red_Alliance_Rear extends LinearOpMode {
         sleep(1000);
     }
 }
+
