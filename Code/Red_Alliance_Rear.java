@@ -81,7 +81,7 @@ public class Red_Alliance_Rear extends LinearOpMode {
         FrontRight.setPower(0.5);
         BackRight.setPower(-0.5);
         runtime.reset();
-        while (opModeIsActive() && (runtime.seconds() < 1.85)) {
+        while (opModeIsActive() && (runtime.seconds() < 1.65)) {
             telemetry.addData("Path", "Leg 2: %4.1f S Elapsed", runtime.seconds());
             telemetry.update();
         }
