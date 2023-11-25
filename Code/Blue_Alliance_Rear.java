@@ -62,6 +62,16 @@ public class Blue_Alliance_Rear extends LinearOpMode {
         waitForStart();
 
         // Step through each leg of the path, ensuring that the Auto mode has not been stopped along the way
+        // Step 4:  Strafe right for 1.5 seconds
+        FrontLeft.setPower(0.5);
+        BackLeft.setPower(-0.5);
+        FrontRight.setPower(-0.5);
+        BackRight.setPower(0.5);
+        runtime.reset();
+        while (opModeIsActive() && (runtime.seconds() < 0.5)) {
+            telemetry.addData("Path", "Leg 3: %4.1f S Elapsed", runtime.seconds());
+            telemetry.update();
+        }
 
         runtime.reset();
 
