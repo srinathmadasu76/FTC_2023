@@ -70,17 +70,19 @@ public class BasicRobot extends OpMode
         BackLeft.setPower(0);
         FrontLeft.setPower(0);
         BackRight.setPower(0);
-        if (gamepad1.y) {
-           arm.setPower(0.3);
-           rackpServo.setPower(0.3);
-            runtime.reset();
-            while ( (runtime.seconds() < 0.5)) {
-                telemetry.addData("Path", "Leg 3: %4.1f S Elapsed", runtime.seconds());
-                telemetry.update();
-            }
-            arm.setPower(0.);
-            rackpServo.setPower(0.);
-        }
+        arm.setPower(0.);
+        rackpServo.setPower(0. );
+        //if (gamepad1.y) {
+           //arm.setPower(0.3);
+           //rackpServo.setPower(0.3);
+            //runtime.reset();
+            //while ( (runtime.seconds() < 0.5)) {
+                //telemetry.addData("Path", "Leg 3: %4.1f S Elapsed", runtime.seconds());
+                //telemetry.update();
+            //}
+            //arm.setPower(0.);
+            //rackpServo.setPower(0. );
+        //}
 
         if (gamepad2.left_stick_y!=0.0) {
             armpower =  Range.clip(gamepad2.left_stick_y, -0.35, 0.35);
@@ -158,7 +160,5 @@ public class BasicRobot extends OpMode
             //leftClaw.setPosition(clawOffset);
             //rightClaw.setPosition(-clawOffset);
         }
-
-
 
     }
