@@ -22,6 +22,7 @@ public class BasicRobot extends OpMode
     DcMotor arm= null;
 
     CRServo contServo;
+    //DcMotor rackpMotor=null;
     CRServo rackpServo;
     double griprPosition = .2;
     double griplPosition = .2;
@@ -56,7 +57,7 @@ public class BasicRobot extends OpMode
         arm = hardwareMap.dcMotor.get("arm");
         contServo = hardwareMap.crservo.get("grabberServo");
         rackpServo = hardwareMap.crservo.get("rackpinnionServo");
-
+        //rackpMotor = hardwareMap.dcMotor.get("rackpMotor");
         //arm.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         //arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         //arm.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
@@ -72,6 +73,7 @@ public class BasicRobot extends OpMode
         BackRight.setPower(0);
         arm.setPower(0.);
         rackpServo.setPower(0. );
+        //rackpMotor.setPower(0. );
         //if (gamepad1.y) {
            //arm.setPower(0.3);
            //rackpServo.setPower(0.3);
@@ -83,9 +85,24 @@ public class BasicRobot extends OpMode
             //arm.setPower(0.);
             //rackpServo.setPower(0. );
         //}
+        if (gamepad1.a){
 
+            //clawOffset -= CLAW_SPEED;
+            FrontLeft.setPower(-0.3);
+            BackLeft.setPower(-0.3);
+            FrontRight.setPower(-0.3);
+            BackRight.setPower(-0.3);
+        }
+        if (gamepad1.y){
+
+            //clawOffset -= CLAW_SPEED;
+            FrontLeft.setPower(0.3);
+            BackLeft.setPower(0.3);
+            FrontRight.setPower(0.3);
+            BackRight.setPower(0.3);
+        }
         if (gamepad2.left_stick_y!=0.0) {
-            armpower =  Range.clip(gamepad2.left_stick_y, -0.35, 0.35);
+            armpower =  Range.clip(gamepad2.left_stick_y, -0.35, 0.85);
             arm.setPower(armpower);
         }
         else{
@@ -117,7 +134,7 @@ public class BasicRobot extends OpMode
             FrontLeft.setPower(-0.5);
             BackLeft.setPower(-0.5);
             FrontRight.setPower(0.5);
-            BackRight.setPower(+0.5);
+            BackRight.setPower(0.5);
         }
        else if(gamepad1.right_bumper){
             FrontLeft.setPower(0.5);
@@ -136,26 +153,30 @@ public class BasicRobot extends OpMode
         else if (gamepad2.a){
 
                 //clawOffset -= CLAW_SPEED;
-                cntPower = 0.2;
+                cntPower = 0.9;
 
             }
             else if (gamepad2.b){
 
                 //clawOffset -= CLAW_SPEED;
-                cntPower = -0.2;
+                cntPower = -0.7;
 
             }
         if (gamepad2.left_bumper){
-            racpPower = 0.9;
+            racpPower = 0.4;
 
         }
         else if(gamepad2.right_bumper){
-            racpPower = -0.9;
+            racpPower = -0.4;
 
         }
+        else{
+            racpPower = 0.;
 
+        }
             contServo.setPower(cntPower);
             rackpServo.setPower(racpPower);
+            //rackpMotor.setPower(racpPower);
             //clawOffset = Range.clip(clawOffset, -0.3, 0.3);
             //leftClaw.setPosition(clawOffset);
             //rightClaw.setPosition(-clawOffset);
