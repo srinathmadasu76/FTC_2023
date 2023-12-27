@@ -23,9 +23,9 @@ public class Test_sensor extends LinearOpMode {
     DcMotor BackRight = null;
     DcMotor Intake = null;
     DcMotor arm= null;
-    CRServo contServo;
+    CRServo racpServo;
     private ElapsedTime runtime = new ElapsedTime();
-    double cntPower = -0.5;
+    double racpPower = -0.5;
     double armPower = 0.5;
     @Override
     public void runOpMode() {
@@ -45,7 +45,7 @@ public class Test_sensor extends LinearOpMode {
         // = hardwareMap.servo.get("leftclaw");
         //rightClaw = hardwareMap.servo.get("rightclaw");
 
-        contServo = hardwareMap.crservo.get("grabberServo");
+        racpServo = hardwareMap.crservo.get("grabberServo");
         // you can also cast this to a Rev2mDistanceSensor if you want to use added
         // methods associated with the Rev2mDistanceSensor class.
         //Rev2mDistanceSensor sensorTimeOfFlight = (Rev2mDistanceSensor)  sensorleft;
@@ -119,7 +119,7 @@ public class Test_sensor extends LinearOpMode {
                 telemetry.update();
             }
             runtime.reset();
-            contServo.setPower(cntPower);
+            racpServo.setPower(racpPower);
             while (opModeIsActive() && (runtime.seconds() < 0.5)) {
                 telemetry.addData("Path", "Leg 3: %4.1f S Elapsed", runtime.seconds());
                 telemetry.update();
@@ -181,7 +181,7 @@ public class Test_sensor extends LinearOpMode {
                     telemetry.update();
                 }
                 runtime.reset();
-                contServo.setPower(cntPower);
+                racpServo.setPower(racpPower);
                 while (opModeIsActive() && (runtime.seconds() < 0.5)) {
                     telemetry.addData("Path", "Leg 3: %4.1f S Elapsed", runtime.seconds());
                     telemetry.update();
@@ -232,7 +232,7 @@ public class Test_sensor extends LinearOpMode {
                     telemetry.update();
                 }
                 runtime.reset();
-                contServo.setPower(cntPower);
+                racpServo.setPower(racpPower);
                 while (opModeIsActive() && (runtime.seconds() < 0.5)) {
                     telemetry.addData("Path", "Leg 3: %4.1f S Elapsed", runtime.seconds());
                     telemetry.update();
