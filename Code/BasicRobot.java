@@ -20,7 +20,7 @@ public class BasicRobot extends OpMode
     Servo leftClaw= null;
     Servo rightClaw= null;
     DcMotor arm= null;
-
+    DcMotor hangingmotor = null;
     CRServo contServo;
     //DcMotor rackpMotor=null;
     CRServo rackpServo;
@@ -37,7 +37,11 @@ public class BasicRobot extends OpMode
     double cntPower =0.;
     double racpPower = 0.;
 
-    double armpower;
+    double armpower = 0.5;
+    double hangingmotorpower=0.9;
+    double motor_ticks_count = 728;
+    double turn;
+    int newTarget;
     @Override
     public void init()
     {
@@ -55,6 +59,7 @@ public class BasicRobot extends OpMode
         // = hardwareMap.servo.get("leftclaw");
         //rightClaw = hardwareMap.servo.get("rightclaw");
         arm = hardwareMap.dcMotor.get("arm");
+        hangingmotor = hardwareMap.dcMotor.get("hangingmotor");
         contServo = hardwareMap.crservo.get("grabberServo");
         rackpServo = hardwareMap.crservo.get("rackpinnionServo");
         //rackpMotor = hardwareMap.dcMotor.get("rackpMotor");
@@ -101,13 +106,13 @@ public class BasicRobot extends OpMode
             FrontRight.setPower(0.3);
             BackRight.setPower(0.3);
         }
-        if (gamepad2.left_stick_y!=0.0) {
-            armpower =  Range.clip(gamepad2.left_stick_y, -0.35, 0.85);
-            arm.setPower(armpower);
-        }
-        else{
-            arm.setPower(0.);
-        }
+       // if (gamepad2.left_stick_y!=0.0) {
+          //  armpower =  Range.clip(gamepad2.left_stick_y, -0.35, 0.85);
+          //  arm.setPower(armpower);
+        //}
+        //else{
+           // arm.setPower(0.);
+        //}
         if (gamepad2.right_stick_y!=0.0) {
             Intake.setPower(gamepad2.right_stick_y);
         }
@@ -172,6 +177,50 @@ public class BasicRobot extends OpMode
         }
         else{
             racpPower = 0.;
+
+        }
+
+        if (gamepad2.x){
+            turn = motor_ticks_count/4;
+            //arm.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+            arm.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+            arm.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+            newTarget = arm.getCurrentPosition() + (int)turn;
+            arm.setPower(armpower);
+            arm.setTargetPosition(newTarget);
+            arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+            while(gamepad2.x || arm.isBusy()) {
+                telemetry.addData("Turn", "Leg 2: %4.1f S Elapsed", turn);
+                telemetry.update();
+            }
+            //arm.setPower(0.);
+        }
+        if (gamepad2.dpad_down){
+            turn = motor_ticks_count/4;
+            arm.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+            arm.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+            arm.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+            newTarget = arm.getCurrentPosition() - (int)turn;
+            arm.setTargetPosition(newTarget);
+            arm.setPower(armpower);
+            arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+
+            while (gamepad2.dpad_down || arm.isBusy()) {
+                telemetry.addData("Distance", "Leg 2: %4.1f S Elapsed", turn);
+                telemetry.update();
+            }
+            arm.setPower(0.);
+        }
+        if (gamepad1.x){
+
+            hangingmotor.setPower(hangingmotorpower);
+
+        }
+        else if (gamepad1.b){
+
+            hangingmotor.setPower(0.);
 
         }
             contServo.setPower(cntPower);
