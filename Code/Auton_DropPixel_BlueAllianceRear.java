@@ -12,9 +12,9 @@ import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 
 
 
-@Autonomous(name="Auton_DropPixel_RedAllianceFront", group="Robot")
+@Autonomous(name="Auton_DropPixel_BlueAllianceRear", group="Robot")
 //@Disabled
-public class Auton_DropPixel_RedAllianceFront extends LinearOpMode {
+public class Auton_DropPixel_BlueAllianceRear extends LinearOpMode {
     private DistanceSensor sensorleft;
     private DistanceSensor sensorright;
     DcMotor FrontLeft = null;
@@ -25,7 +25,7 @@ public class Auton_DropPixel_RedAllianceFront extends LinearOpMode {
     DcMotor arm= null;
     CRServo bucketServo;
     private ElapsedTime runtime = new ElapsedTime();
-    double bucketPower = 0.5;
+    double bucketPower = 0.2;
     double armPower = 0.3;
     double armPowerRetract = 0.2;
     double motor_ticks_count = 728;
@@ -61,7 +61,7 @@ public class Auton_DropPixel_RedAllianceFront extends LinearOpMode {
         //Rev2mDistanceSensor sensorTimeOfFlight = (Rev2mDistanceSensor)  sensorleft;
         //Rev2mDistanceSensor sensorTimeOfFlight = (Rev2mDistanceSensor)  sensorright;
         waitForStart();
-//-,-,+,+,0.4,0.7
+
         FrontLeft.setPower(-0.3);
         BackLeft.setPower(0.3);
         FrontRight.setPower(0.3);
@@ -121,10 +121,10 @@ public class Auton_DropPixel_RedAllianceFront extends LinearOpMode {
             }
 
         }
-       // while (opModeIsActive() && (runtime.seconds() < 3.8)) {
-         //  telemetry.addData("Distance-right1", "Leg 2: %4.1f S Elapsed", valuemiddle);
-          // telemetry.update();
-       // }
+      //  while (opModeIsActive() && (runtime.seconds() < 3.8)) {
+        //    telemetry.addData("Distance-right1", "Leg 2: %4.1f S Elapsed", valuemiddle);
+         //   telemetry.update();
+      //  }
         FrontLeft.setPower(-0.3);
         BackLeft.setPower(-0.3);
         FrontRight.setPower(0.3);
@@ -143,50 +143,22 @@ public class Auton_DropPixel_RedAllianceFront extends LinearOpMode {
             telemetry.addData("Path", "Leg 2: %4.1f S Elapsed", runtime.seconds());
             telemetry.update();
         }
-        //valueleft = 18;
         if (valueleft > 1 && valueleft < distancethreshold) {
             FrontLeft.setPower(-0.15);
             BackLeft.setPower(-0.15);
             FrontRight.setPower(-0.15);
             BackRight.setPower(-0.15);
             runtime.reset();
-            while (opModeIsActive() && (runtime.seconds() < 3)) {
+            while (opModeIsActive() && (runtime.seconds() < 4)) {
                 telemetry.addData("Distance", "Leg 2: %4.1f S Elapsed", valueleft);
                 telemetry.update();
             }
             FrontLeft.setPower(-0.2);
-                BackLeft.setPower(-0.2);
-                FrontRight.setPower(0.2);
-                BackRight.setPower(0.2);
-                runtime.reset();
-                while (opModeIsActive() && (runtime.seconds() < 1.2)) {
-                    telemetry.addData("Distance", "Leg 2: %4.1f S Elapsed", valueleft);
-                    telemetry.update();
-                }
-            FrontLeft.setPower(-0.);
-            BackLeft.setPower(-0.);
-            FrontRight.setPower(0.);
-            BackRight.setPower(0.);
-                    runtime.reset();
-
-                turn = motor_ticks_count/4;
-
-                    arm.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-                    newTarget = arm.getCurrentPosition() + (int)turn;
-                    arm.setTargetPosition(newTarget);
-                    arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            arm.setPower(armPower);
-                    while (opModeIsActive() && arm.isBusy()) {
-                        telemetry.addData("Distance", "Leg 2: %4.1f S Elapsed", valueleft);
-                        telemetry.update();
-                    }
-            //arm.setPower(0.);
-            FrontLeft.setPower(0.15);
-            BackLeft.setPower(0.15);
-            FrontRight.setPower(0.15);
-            BackRight.setPower(0.15);
+            BackLeft.setPower(-0.2);
+            FrontRight.setPower(0.2);
+            BackRight.setPower(0.2);
             runtime.reset();
-            while (opModeIsActive() && (runtime.seconds() < 1)) {
+            while (opModeIsActive() && (runtime.seconds() < 0.01)) {
                 telemetry.addData("Distance", "Leg 2: %4.1f S Elapsed", valueleft);
                 telemetry.update();
             }
@@ -194,25 +166,48 @@ public class Auton_DropPixel_RedAllianceFront extends LinearOpMode {
             BackLeft.setPower(-0.);
             FrontRight.setPower(0.);
             BackRight.setPower(0.);
-            sleep(2000);
-            //spin anticlockwise
             runtime.reset();
-            FrontLeft.setPower(0.5);
-            BackLeft.setPower(-0.5);
-            FrontRight.setPower(-0.5);
-            BackRight.setPower(0.5);
+
+            turn = motor_ticks_count/4;
+
+            arm.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+            newTarget = arm.getCurrentPosition() + (int)turn;
+            arm.setTargetPosition(newTarget);
+            arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            arm.setPower(armPower);
+            while (opModeIsActive() && arm.isBusy()) {
+                telemetry.addData("Distance", "Leg 2: %4.1f S Elapsed", valueleft);
+                telemetry.update();
+            }
+            //arm.setPower(0.);
+            FrontLeft.setPower(-0.2);
+            BackLeft.setPower(-0.2);
+            FrontRight.setPower(-0.2);
+            BackRight.setPower(-0.2);
             runtime.reset();
-            while (opModeIsActive() && (runtime.seconds() < 0.9)) {
-              telemetry.addData("Path", "Leg 3: %4.1f S Elapsed", runtime.seconds());
-             telemetry.update();
-             }
-                    //Go to Park
+            while (opModeIsActive() && (runtime.seconds() < 1.2)) {
+                telemetry.addData("Distance", "Leg 2: %4.1f S Elapsed", valueleft);
+                telemetry.update();
+            }
+
+            //spin clockwise
+            runtime.reset();
+            FrontLeft.setPower(-0.5);
+            BackLeft.setPower(0.5);
+            FrontRight.setPower(0.5);
+            BackRight.setPower(-0.5);
+            runtime.reset();
+            while (opModeIsActive() && (runtime.seconds() < 1)) {
+                telemetry.addData("Path", "Leg 3: %4.1f S Elapsed", runtime.seconds());
+                telemetry.update();
+            }
+            //Go to Park
             FrontLeft.setPower(0.5);
             BackLeft.setPower(0.5);
             FrontRight.setPower(0.5);
             BackRight.setPower(0.5);
             runtime.reset();
-            while (opModeIsActive() && (runtime.seconds() < 1.4)) {
+            while (opModeIsActive() && (runtime.seconds() < 3.9)) {
                 telemetry.addData("Path", "Leg 3: %4.1f S Elapsed", runtime.seconds());
                 telemetry.update();
             }
@@ -223,6 +218,15 @@ public class Auton_DropPixel_RedAllianceFront extends LinearOpMode {
             //if (error<0) {
             // armPower = -armPower;
             // }
+            FrontLeft.setPower(-0.3);
+            BackLeft.setPower(-0.3);
+            FrontRight.setPower(0.3);
+            BackRight.setPower(0.3);
+            runtime.reset();
+            while (opModeIsActive() && (runtime.seconds() < 1)) {
+                telemetry.addData("Path", "Leg 3: %4.1f S Elapsed", runtime.seconds());
+                telemetry.update();
+            }
             FrontLeft.setPower(-0.);
             BackLeft.setPower(-0.);
             FrontRight.setPower(0.);
@@ -239,7 +243,7 @@ public class Auton_DropPixel_RedAllianceFront extends LinearOpMode {
             bucketServo.setPower(-bucketPower);
             sleep(1000);
 
-            while (opModeIsActive() && (runtime.seconds() < 7)) {
+            while (opModeIsActive() && (runtime.seconds() < 10)) {
                 telemetry.addData("Path", "Leg 3: %4.1f S Elapsed", runtime.seconds());
                 telemetry.update();
             }
@@ -248,8 +252,8 @@ public class Auton_DropPixel_RedAllianceFront extends LinearOpMode {
 
         else {
 
-            FrontLeft.setPower(0.3);
-            BackLeft.setPower(0.3);
+            FrontLeft.setPower(-0.3);
+            BackLeft.setPower(-0.3);
             FrontRight.setPower(-0.3);
             BackRight.setPower(-0.3);
             runtime.reset();
@@ -260,27 +264,27 @@ public class Auton_DropPixel_RedAllianceFront extends LinearOpMode {
             valueleft = sensorleft.getDistance(DistanceUnit.INCH);
             telemetry.addData("Distancemiddle", "Leg 2: %4.1f S Elapsed", valueleft);
             telemetry.update();
-            //valueleft = 18;
+            //valueleft=26;
             if (valuemiddle > 1 && valuemiddle < distancethreshold) {
-                    FrontLeft.setPower(-0.15);
-                    BackLeft.setPower(-0.15);
-                    FrontRight.setPower(-0.15);
-                    BackRight.setPower(-0.15);
-                    runtime.reset();
-                    while (opModeIsActive() && (runtime.seconds() < 2.5)) {
-                        telemetry.addData("Distancemiddle", "Leg 2: %4.1f S Elapsed", valueleft);
-                        telemetry.update();
-                    }
-                    FrontLeft.setPower(0.3);
-                    BackLeft.setPower(0.3);
-                    FrontRight.setPower(-0.3);
-                    BackRight.setPower(-0.3);
-                    runtime.reset();
-                    while (opModeIsActive() && (runtime.seconds() < 0.1)) {
-                        telemetry.addData("Distancemiddle", "Leg 2: %4.1f S Elapsed", valueleft);
-                        telemetry.update();
-                    }
-                    runtime.reset();
+                FrontLeft.setPower(-0.15);
+                BackLeft.setPower(-0.15);
+                FrontRight.setPower(-0.15);
+                BackRight.setPower(-0.15);
+                runtime.reset();
+                while (opModeIsActive() && (runtime.seconds() < 3)) {
+                    telemetry.addData("Distancemiddle", "Leg 2: %4.1f S Elapsed", valueleft);
+                    telemetry.update();
+                }
+                FrontLeft.setPower(0.3);
+                BackLeft.setPower(0.3);
+                FrontRight.setPower(-0.3);
+                BackRight.setPower(-0.3);
+                runtime.reset();
+                while (opModeIsActive() && (runtime.seconds() < 0.1)) {
+                    telemetry.addData("Distancemiddle", "Leg 2: %4.1f S Elapsed", valueleft);
+                    telemetry.update();
+                }
+                runtime.reset();
 
 
                 turn = motor_ticks_count/4;
@@ -289,58 +293,61 @@ public class Auton_DropPixel_RedAllianceFront extends LinearOpMode {
                 arm.setTargetPosition(newTarget);
                 arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                 arm.setPower(armPower);
-               while (opModeIsActive() && arm.isBusy()) {
+                while (opModeIsActive() && arm.isBusy()) {
                     telemetry.addData("Distancemiddle", "Leg 2: %4.1f S Elapsed", valueleft);
                     telemetry.update();
                 }
                 //arm.setPower(0.);
-                FrontLeft.setPower(0.15);
-                BackLeft.setPower(0.15);
-                FrontRight.setPower(0.15);
-                BackRight.setPower(0.15);
+                FrontLeft.setPower(-0.2);
+                BackLeft.setPower(-0.2);
+                FrontRight.setPower(-0.2);
+                BackRight.setPower(-0.2);
                 runtime.reset();
-                while (opModeIsActive() && (runtime.seconds() < 1)) {
+                while (opModeIsActive() && (runtime.seconds() < 1.2)) {
                     telemetry.addData("Distancemiddle", "Leg 2: %4.1f S Elapsed", valueleft);
                     telemetry.update();
                 }
-                FrontLeft.setPower(-0.);
-                BackLeft.setPower(-0.);
-                FrontRight.setPower(0.);
-                BackRight.setPower(0.);
-                sleep(2000);
-                //spin anticlockwise
-                  runtime.reset();
-                FrontLeft.setPower(0.5);
-                BackLeft.setPower(-0.5);
-                FrontRight.setPower(-0.5);
-                BackRight.setPower(0.5);
+                //spin clockwise
                 runtime.reset();
-                 while (opModeIsActive() && (runtime.seconds() < 0.9)) {
+                FrontLeft.setPower(-0.5);
+                BackLeft.setPower(0.5);
+                FrontRight.setPower(0.5);
+                BackRight.setPower(-0.5);
+                runtime.reset();
+                while (opModeIsActive() && (runtime.seconds() < 1)) {
                     telemetry.addData("Path", "Leg 3: %4.1f S Elapsed", runtime.seconds());
-                   telemetry.update();
-                 }
+                    telemetry.update();
+                }
                 //Go to Park
                 FrontLeft.setPower(0.5);
                 BackLeft.setPower(0.5);
                 FrontRight.setPower(0.5);
                 BackRight.setPower(0.5);
                 runtime.reset();
-                while (opModeIsActive() && (runtime.seconds() < 1.5)) {
+                while (opModeIsActive() && (runtime.seconds() < 3.9)) {
                     telemetry.addData("Path", "Leg 3: %4.1f S Elapsed", runtime.seconds());
                     telemetry.update();
                 }
 
-                FrontLeft.setPower(0.);
-                BackLeft.setPower(-0.);
-                FrontRight.setPower(-0.);
-                BackRight.setPower(0.);
                 //double error = (desiredPosition - arm.getCurrentPosition());
                 //double kp = 1;
                 //armPower += kp*error;
                 //if (error<0) {
                 // armPower = -armPower;
                 // }
-
+                FrontLeft.setPower(-0.3);
+                BackLeft.setPower(-0.3);
+                FrontRight.setPower(0.3);
+                BackRight.setPower(0.3);
+                runtime.reset();
+                while (opModeIsActive() && (runtime.seconds() < 1)) {
+                    telemetry.addData("Path", "Leg 3: %4.1f S Elapsed", runtime.seconds());
+                    telemetry.update();
+                }
+                FrontLeft.setPower(-0.);
+                BackLeft.setPower(-0.);
+                FrontRight.setPower(0.);
+                BackRight.setPower(0.);
                 runtime.reset();
                 bucketServo.setPower(bucketPower);
                 sleep(1000);
@@ -353,12 +360,11 @@ public class Auton_DropPixel_RedAllianceFront extends LinearOpMode {
                 bucketServo.setPower(-bucketPower);
                 sleep(1000);
 
-                while (opModeIsActive() && (runtime.seconds() < 7)) {
+                while (opModeIsActive() && (runtime.seconds() < 10)) {
                     telemetry.addData("Path", "Leg 3: %4.1f S Elapsed", runtime.seconds());
                     telemetry.update();
                 }
-
-                }
+            }
             else {
                 runtime.reset();
                 FrontLeft.setPower(-0.15);
@@ -386,31 +392,25 @@ public class Auton_DropPixel_RedAllianceFront extends LinearOpMode {
                 BackRight.setPower(-0.);
 
 
-                FrontLeft.setPower(-0.15);
-                BackLeft.setPower(-0.15);
-                FrontRight.setPower(-0.15);
-                BackRight.setPower(-0.15);
+                FrontLeft.setPower(-0.2);
+                BackLeft.setPower(-0.2);
+                FrontRight.setPower(-0.2);
+                BackRight.setPower(-0.2);
                 runtime.reset();
                 while (opModeIsActive() && (runtime.seconds() < 1.8)) {
                     telemetry.addData("Distance", "Leg 2: %4.1f S Elapsed", valueleft);
                     telemetry.update();
                 }
-                FrontLeft.setPower(-0.);
-                BackLeft.setPower(-0.);
-                FrontRight.setPower(0.);
-                BackRight.setPower(0.);
-
-                sleep(2000);
-                //spin anticlockwise
+                //spin clockwise
                 runtime.reset();
-                FrontLeft.setPower(0.5);
-                BackLeft.setPower(-0.5);
-                FrontRight.setPower(-0.5);
-                BackRight.setPower(0.5);
+                FrontLeft.setPower(-0.5);
+                BackLeft.setPower(0.5);
+                FrontRight.setPower(0.5);
+                BackRight.setPower(-0.5);
                 runtime.reset();
                 while (opModeIsActive() && (runtime.seconds() < 0.9)) {
-                  telemetry.addData("Path", "Leg 3: %4.1f S Elapsed", runtime.seconds());
-                  telemetry.update();
+                    telemetry.addData("Path", "Leg 3: %4.1f S Elapsed", runtime.seconds());
+                    telemetry.update();
                 }
                 //Go to Park
                 FrontLeft.setPower(0.5);
@@ -418,11 +418,26 @@ public class Auton_DropPixel_RedAllianceFront extends LinearOpMode {
                 FrontRight.setPower(0.5);
                 BackRight.setPower(0.5);
                 runtime.reset();
-                while (opModeIsActive() && (runtime.seconds() < 1.2)) {
+                while (opModeIsActive() && (runtime.seconds() < 3.9)) {
                     telemetry.addData("Path", "Leg 3: %4.1f S Elapsed", runtime.seconds());
                     telemetry.update();
                 }
 
+                //double error = (desiredPosition - arm.getCurrentPosition());
+                //double kp = 1;
+                //armPower += kp*error;
+                //if (error<0) {
+                // armPower = -armPower;
+                // }
+                FrontLeft.setPower(-0.3);
+                BackLeft.setPower(-0.3);
+                FrontRight.setPower(0.3);
+                BackRight.setPower(0.3);
+                runtime.reset();
+                while (opModeIsActive() && (runtime.seconds() < 1)) {
+                    telemetry.addData("Path", "Leg 3: %4.1f S Elapsed", runtime.seconds());
+                    telemetry.update();
+                }
                 FrontLeft.setPower(-0.);
                 BackLeft.setPower(-0.);
                 FrontRight.setPower(0.);
@@ -439,13 +454,6 @@ public class Auton_DropPixel_RedAllianceFront extends LinearOpMode {
                     telemetry.addData("Distance", "Leg 2: %4.1f S Elapsed", valueleft);
                     telemetry.update();
                 }
-                //double error = (desiredPosition - arm.getCurrentPosition());
-                //double kp = 1;
-                //armPower += kp*error;
-                //if (error<0) {
-                // armPower = -armPower;
-                // }
-
                 runtime.reset();
                 bucketServo.setPower(bucketPower);
                 sleep(1000);
@@ -464,10 +472,8 @@ public class Auton_DropPixel_RedAllianceFront extends LinearOpMode {
                 }
             }
 
-            }
-
         }
+
     }
-
-
+}
 

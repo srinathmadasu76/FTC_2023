@@ -38,7 +38,7 @@ public class BasicRobot extends OpMode
     double cntPower =0.;
     double racpPower = 0.;
     double dronePower = -1;
-    double armpower = 0.5;
+    double armpower = 0.7;
     double hangingmotorpower=0.9;
     double motor_ticks_count = 728;
     double turn;
@@ -183,11 +183,11 @@ public class BasicRobot extends OpMode
         }
 
         if (gamepad2.x) {
-            turn = motor_ticks_count / 8;
+            turn = motor_ticks_count / 10;
             arm.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
             arm.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
            // arm.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-            newTarget = arm.getCurrentPosition() + (int) turn;
+            newTarget = arm.getCurrentPosition()+ (int) turn;
             arm.setPower(armpower);
            arm.setTargetPosition(newTarget);
             arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
@@ -196,13 +196,31 @@ public class BasicRobot extends OpMode
 
             while (arm.isBusy()) {
                 telemetry.addData("Turn",  arm.getCurrentPosition());
+                telemetry.addData("target",  newTarget);
                telemetry.update();
 
             }
-          //  contServo.setPower(cntPower);
-          //  rackpServo.setPower(racpPower);
-          //  arm.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
+
+
         }
+        //while (Math.abs(arm.getCurrentPosition()-newTarget)<=7 && !gamepad2.dpad_left) {
+            //telemetry.addData("Turn1",  arm.getCurrentPosition());
+            //telemetry.addData("target",  newTarget);
+            //telemetry.update();
+            //arm.setPower(armpower);
+             //contServo.setPower(cntPower);
+             //rackpServo.setPower(racpPower);
+            //  arm.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
+        //}
+        //  contServo.setPower(cntPower);
+        //  rackpServo.setPower(racpPower);
+        //  arm.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+       if (gamepad2.dpad_left){
+            arm.setPower(0.);
+        }
+
         //if (gamepad2.dpad_down){
             //turn = motor_ticks_count/4;
             //arm.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
