@@ -146,24 +146,24 @@ public class Auton_DropPixel_BlueAllianceFront extends LinearOpMode {
            // telemetry.update();
        // }
 
-        FrontLeft.setPower(0.3);
-        BackLeft.setPower(0.3);
-        FrontRight.setPower(-0.3);
-        BackRight.setPower(-0.3);
-        runtime.reset();
-        while (opModeIsActive() && (runtime.seconds() < 0.4)) {
-            telemetry.addData("Path", "Leg 3: %4.1f S Elapsed", runtime.seconds());
-            telemetry.update();
-        }
-        FrontLeft.setPower(-0.3);
-        BackLeft.setPower(-0.3);
-        FrontRight.setPower(-0.3);
-        BackRight.setPower(-0.3);
-        runtime.reset();
-        while (opModeIsActive() && (runtime.seconds() < 0.7)) {
-            telemetry.addData("Path", "Leg 2: %4.1f S Elapsed", runtime.seconds());
-            telemetry.update();
-        }
+       // FrontLeft.setPower(0.3);
+        //BackLeft.setPower(0.3);
+        //FrontRight.setPower(-0.3);
+        //BackRight.setPower(-0.3);
+        //runtime.reset();
+       // while (opModeIsActive() && (runtime.seconds() < 0.4)) {
+         //   telemetry.addData("Path", "Leg 3: %4.1f S Elapsed", runtime.seconds());
+         //   telemetry.update();
+      // }
+       // FrontLeft.setPower(-0.3);
+       // BackLeft.setPower(-0.3);
+       // FrontRight.setPower(-0.3);
+       // BackRight.setPower(-0.3);
+       // runtime.reset();
+       // while (opModeIsActive() && (runtime.seconds() < 0.7)) {
+        //    telemetry.addData("Path", "Leg 2: %4.1f S Elapsed", runtime.seconds());
+         //   telemetry.update();
+      //  }
 
         //valueleft=8;
         if (valueleft > 1 && valueleft < distancethreshold) {
@@ -176,10 +176,10 @@ public class Auton_DropPixel_BlueAllianceFront extends LinearOpMode {
                 telemetry.addData("Distance", "Leg 2: %4.1f S Elapsed", valueleft);
                 telemetry.update();
             }
-            FrontLeft.setPower(0.2);
-            BackLeft.setPower(0.2);
-            FrontRight.setPower(-0.2);
-            BackRight.setPower(-0.2);
+            FrontLeft.setPower(-0.2);
+            BackLeft.setPower(-0.2);
+            FrontRight.setPower(0.2);
+            BackRight.setPower(0.2);
             runtime.reset();
             while (opModeIsActive() && (runtime.seconds() < 1.2)) {
                 telemetry.addData("Distance", "Leg 2: %4.1f S Elapsed", valueleft);
@@ -202,10 +202,10 @@ public class Auton_DropPixel_BlueAllianceFront extends LinearOpMode {
                 telemetry.addData("Distance", "Leg 2: %4.1f S Elapsed", valueleft);
                 telemetry.update();
             }
-            FrontLeft.setPower(-0.15);
-            BackLeft.setPower(-0.15);
-            FrontRight.setPower(-0.15);
-            BackRight.setPower(-0.15);
+            FrontLeft.setPower(0.15);
+            BackLeft.setPower(0.15);
+            FrontRight.setPower(0.15);
+            BackRight.setPower(0.15);
             runtime.reset();
             while (opModeIsActive() && (runtime.seconds() < 1)) {
                 telemetry.addData("Distance", "Leg 2: %4.1f S Elapsed", valueleft);
@@ -286,18 +286,18 @@ public class Auton_DropPixel_BlueAllianceFront extends LinearOpMode {
 
         else {
 
-            FrontLeft.setPower(-0.3);
-            BackLeft.setPower(-0.3);
-            FrontRight.setPower(0.3);
-            BackRight.setPower(0.3);
-            runtime.reset();
-            while (opModeIsActive() && (runtime.seconds() < 0.3)) {
-                telemetry.addData("Path", "Leg 3: %4.1f S Elapsed", runtime.seconds());
-                telemetry.update();
-            }
-            valueleft = sensorleft.getDistance(DistanceUnit.INCH);
-            telemetry.addData("Distancemiddle", "Leg 2: %4.1f S Elapsed", valueleft);
-            telemetry.update();
+           // FrontLeft.setPower(-0.3);
+           // BackLeft.setPower(-0.3);
+          //  FrontRight.setPower(0.3);
+           // BackRight.setPower(0.3);
+           // runtime.reset();
+          //  while (opModeIsActive() && (runtime.seconds() < 0.3)) {
+           //     telemetry.addData("Path", "Leg 3: %4.1f S Elapsed", runtime.seconds());
+           //     telemetry.update();
+           // }
+           // valueleft = sensorleft.getDistance(DistanceUnit.INCH);
+            //telemetry.addData("Distancemiddle", "Leg 2: %4.1f S Elapsed", valueleft);
+           // telemetry.update();
             //valueleft = 8;
             if (valuemiddle > 1 && valuemiddle < distancethreshold) {
                 FrontLeft.setPower(-0.15);

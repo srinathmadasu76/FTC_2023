@@ -147,24 +147,24 @@ public class Auton_DropPixel_RedAllianceFront extends LinearOpMode {
          //  telemetry.addData("Distance-right1", "Leg 2: %4.1f S Elapsed", valuemiddle);
           // telemetry.update();
        // }
-        FrontLeft.setPower(-0.3);
-        BackLeft.setPower(-0.3);
-        FrontRight.setPower(0.3);
-        BackRight.setPower(0.3);
-        runtime.reset();
-        while (opModeIsActive() && (runtime.seconds() < 0.4)) {
-            telemetry.addData("Path", "Leg 3: %4.1f S Elapsed", runtime.seconds());
-            telemetry.update();
-        }
-        FrontLeft.setPower(-0.3);
-        BackLeft.setPower(-0.3);
-        FrontRight.setPower(-0.3);
-        BackRight.setPower(-0.3);
-        runtime.reset();
-        while (opModeIsActive() && (runtime.seconds() < 0.7)) {
-            telemetry.addData("Path", "Leg 2: %4.1f S Elapsed", runtime.seconds());
-            telemetry.update();
-        }
+       // FrontLeft.setPower(-0.3);
+       // BackLeft.setPower(-0.3);
+       // FrontRight.setPower(0.3);
+       // BackRight.setPower(0.3);
+      //  runtime.reset();
+      //  while (opModeIsActive() && (runtime.seconds() < 0.4)) {
+      //      telemetry.addData("Path", "Leg 3: %4.1f S Elapsed", runtime.seconds());
+       //     telemetry.update();
+      //  }
+      //  FrontLeft.setPower(-0.3);
+     //   BackLeft.setPower(-0.3);
+      //  FrontRight.setPower(-0.3);
+      //  BackRight.setPower(-0.3);
+      //  runtime.reset();
+      //  while (opModeIsActive() && (runtime.seconds() < 0.7)) {
+      //      telemetry.addData("Path", "Leg 2: %4.1f S Elapsed", runtime.seconds());
+       //     telemetry.update();
+       // }
         //valueleft = 18;
         if (valueleft > 1 && valueleft < distancethreshold) {
             FrontLeft.setPower(-0.15);
@@ -279,18 +279,18 @@ public class Auton_DropPixel_RedAllianceFront extends LinearOpMode {
 
         else {
 
-            FrontLeft.setPower(0.3);
-            BackLeft.setPower(0.3);
-            FrontRight.setPower(-0.3);
-            BackRight.setPower(-0.3);
-            runtime.reset();
-            while (opModeIsActive() && (runtime.seconds() < 0.3)) {
-                telemetry.addData("Path", "Leg 3: %4.1f S Elapsed", runtime.seconds());
-                telemetry.update();
-            }
-            valueleft = sensorleft.getDistance(DistanceUnit.INCH);
-            telemetry.addData("Distancemiddle", "Leg 2: %4.1f S Elapsed", valueleft);
-            telemetry.update();
+           // FrontLeft.setPower(0.3);
+           // BackLeft.setPower(0.3);
+           // FrontRight.setPower(-0.3);
+           // BackRight.setPower(-0.3);
+           // runtime.reset();
+           // while (opModeIsActive() && (runtime.seconds() < 0.3)) {
+            //    telemetry.addData("Path", "Leg 3: %4.1f S Elapsed", runtime.seconds());
+            //    telemetry.update();
+           // }
+           // valueleft = sensorleft.getDistance(DistanceUnit.INCH);
+           // telemetry.addData("Distancemiddle", "Leg 2: %4.1f S Elapsed", valueleft);
+           // telemetry.update();
             //valueleft = 18;
             if (valuemiddle > 1 && valuemiddle < distancethreshold) {
                     FrontLeft.setPower(-0.15);
