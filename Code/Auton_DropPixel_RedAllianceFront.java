@@ -25,7 +25,7 @@ public class Auton_DropPixel_RedAllianceFront extends LinearOpMode {
     DcMotor arm= null;
     CRServo bucketServo;
     private ElapsedTime runtime = new ElapsedTime();
-    double bucketPower = 0.3;
+    double bucketPower = 0.2;
     double armPower = 0.3;
     double armPowerRetract = 0.2;
     double motor_ticks_count = 728;
@@ -270,7 +270,7 @@ public class Auton_DropPixel_RedAllianceFront extends LinearOpMode {
             bucketServo.setPower(-bucketPower);
             sleep(1000);
 
-            while (opModeIsActive() && (runtime.seconds() < 7)) {
+            while (opModeIsActive() && (runtime.seconds() < 3)) {
                 telemetry.addData("Path", "Leg 3: %4.1f S Elapsed", runtime.seconds());
                 telemetry.update();
             }
@@ -393,7 +393,7 @@ public class Auton_DropPixel_RedAllianceFront extends LinearOpMode {
                 bucketServo.setPower(-bucketPower);
                 sleep(1000);
 
-                while (opModeIsActive() && (runtime.seconds() < 7)) {
+                while (opModeIsActive() && (runtime.seconds() < 3)) {
                     telemetry.addData("Path", "Leg 3: %4.1f S Elapsed", runtime.seconds());
                     telemetry.update();
                 }
@@ -507,7 +507,7 @@ public class Auton_DropPixel_RedAllianceFront extends LinearOpMode {
                 bucketServo.setPower(-bucketPower);
                 sleep(1000);
 
-                while (opModeIsActive() && (runtime.seconds() < 7)) {
+                while (opModeIsActive() && (runtime.seconds() < 3)) {
                     telemetry.addData("Path", "Leg 3: %4.1f S Elapsed", runtime.seconds());
                     telemetry.update();
                 }
