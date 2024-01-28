@@ -467,25 +467,11 @@ public class Auton_DropPixel_BlueAllianceFront extends LinearOpMode {
                 FrontRight.setPower(0.5);
                 BackRight.setPower(0.5);
                 runtime.reset();
-                while (opModeIsActive() && (runtime.seconds() < 1.4)) {
+                while (opModeIsActive() && (runtime.seconds() < 1.3)) {
                     telemetry.addData("Path", "Leg 3: %4.1f S Elapsed", runtime.seconds());
                     telemetry.update();
                 }
-                //come back
-                FrontLeft.setPower(-0.5);
-                BackLeft.setPower(-0.5);
-                FrontRight.setPower(-0.5);
-                BackRight.setPower(-0.5);
-                runtime.reset();
-                while (opModeIsActive() && (runtime.seconds() < 0.1)) {
-                    telemetry.addData("Path", "Leg 3: %4.1f S Elapsed", runtime.seconds());
-                    telemetry.update();
-                }
-                // }
-                FrontLeft.setPower(-0.);
-                BackLeft.setPower(-0.);
-                FrontRight.setPower(0.);
-                BackRight.setPower(0.);
+
                 turn = motor_ticks_count/4;
 
                 arm.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);

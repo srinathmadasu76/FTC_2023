@@ -212,7 +212,7 @@ public class Auton_DropPixel_BlueAllianceRear extends LinearOpMode {
             FrontRight.setPower(0.5);
             BackRight.setPower(0.5);
             runtime.reset();
-            while (opModeIsActive() && (runtime.seconds() < 3.9)) {
+            while (opModeIsActive() && (runtime.seconds() < 4)) {
                 telemetry.addData("Path", "Leg 3: %4.1f S Elapsed", runtime.seconds());
                 telemetry.update();
             }
