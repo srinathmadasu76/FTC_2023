@@ -182,28 +182,28 @@ public class BasicRobot extends OpMode
 
         }
 
-        if (gamepad2.x) {
-            turn = motor_ticks_count / 10;
-            arm.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-            arm.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+       // if (gamepad2.x) {
+         //   turn = motor_ticks_count / 10;
+          //  arm.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+          //  arm.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
            // arm.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-            newTarget = arm.getCurrentPosition()+ (int) turn;
-            arm.setPower(armpower);
-           arm.setTargetPosition(newTarget);
-            arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        //    newTarget = arm.getCurrentPosition()+ (int) turn;
+          //  arm.setPower(armpower);
+          // arm.setTargetPosition(newTarget);
+           // arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
           //  runtime.reset();
 
 
-            while (arm.isBusy()) {
-                telemetry.addData("Turn",  arm.getCurrentPosition());
-                telemetry.addData("target",  newTarget);
-               telemetry.update();
+          //  while (arm.isBusy()) {
+         //       telemetry.addData("Turn",  arm.getCurrentPosition());
+           //     telemetry.addData("target",  newTarget);
+           //    telemetry.update();
 
-            }
+            //}
 
 
 
-        }
+       // }
         //while (Math.abs(arm.getCurrentPosition()-newTarget)<=7 && !gamepad2.dpad_left) {
             //telemetry.addData("Turn1",  arm.getCurrentPosition());
             //telemetry.addData("target",  newTarget);
@@ -217,9 +217,9 @@ public class BasicRobot extends OpMode
         //  contServo.setPower(cntPower);
         //  rackpServo.setPower(racpPower);
         //  arm.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-       if (gamepad2.dpad_left){
-            arm.setPower(0.);
-        }
+      // if (gamepad2.dpad_left){
+       //     arm.setPower(0.);
+       // }
 
         //if (gamepad2.dpad_down){
             //turn = motor_ticks_count/4;
@@ -248,13 +248,14 @@ public class BasicRobot extends OpMode
             hangingmotor.setPower(hangingmotorpower);
 
         }
-        else if (gamepad1.b){
+
+        else if (gamepad1.dpad_down) {
+            hangingmotor.setPower(-hangingmotorpower);
+        }
+        else {
 
             hangingmotor.setPower(0.);
 
-        }
-        else if (gamepad1.dpad_down) {
-            hangingmotor.setPower(-hangingmotorpower);
         }
 
             contServo.setPower(cntPower);
